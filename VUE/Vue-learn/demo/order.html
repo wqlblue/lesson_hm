@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>0</h2>
+    <button id="minus">-1</button>
+    <button id="add">+1</button>
+    <script>
+        var btn = document.getElementById('minus')
+        var btn1 = document.getElementById('add')
+        var count = document.querySelector('h2')
+        let num = 0
+        btn.addEventListener('click', () => {
+            num--
+            count.innerText = num
+        })
+        btn1.addEventListener('click', () => {
+            num++
+            count.innerText = num
+        })
+    </script>
+</body>
+
+</html>
