@@ -184,27 +184,25 @@ img {
     top: 42%;
 }
 
+/* 动作导演 */
 .star {
-    /* 动画名字+动画时间+动画效果+动画次数+动画方向 */
+    /* 动画名字 + keyframes 定义动作 */
     animation: star 10s ease-out infinite;
 }
 
 .wars {
+    /* 动画名字 + keyframes 定义动作 */
     animation: wars 10s ease-out infinite;
 }
 
-/* keyframes 定义动作 */
 @keyframes star {
     0% {
         opacity: 0;
-        transform: scale(1.5) translateY(-0.75em)
+        transform: scale(1.5) translateY(-0.75em);
     }
 
     20% {
-
         opacity: 1;
-        transform: scale(1);
-
     }
 
     89% {
@@ -212,25 +210,20 @@ img {
         transform: scale(1);
     }
 
-    /* em 相当于当前元素的font-size的倍数
-rem 相当于根元素的font-size的倍数 */
     100% {
         opacity: 0;
-        transform: scale(0.5) translateZ(-1000em)
+        transform: translateZ(-1000em);
     }
 }
 
 @keyframes wars {
     0% {
         opacity: 0;
-        transform: scale(1.5) translateY(0.5em)
+        transform: scale(1.5) translateY(0.5em);
     }
 
     20% {
-
         opacity: 1;
-        transform: scale(1);
-
     }
 
     90% {
@@ -240,24 +233,26 @@ rem 相当于根元素的font-size的倍数 */
 
     100% {
         opacity: 0;
-        transform: scale(0.5) translateZ(-1000em)
+        transform: translateZ(-1000em);
     }
 }
 
 .byline {
-
-    animation: byline 10s linear infinite;
+    animation: movie-byline 10s linear infinite;
 }
 
 .byline span {
-    animation: spin-letters 5s linear infinite;
+    animation: spin-letters 10s linear infinite;
 }
 
-@keyframes byline {
-    0% {
-        transform: translateZ();
-    }
+.byline span {
+    display: inline-block;
+}
 
+@keyframes movie-byline {
+    0% {
+        transform: translateZ(5em);
+    }
 
     100% {
         transform: translateZ(0em);
@@ -272,7 +267,18 @@ rem 相当于根元素的font-size的倍数 */
         transform: rotateY(90deg);
     }
 
-    70% {
-        opacity: 0.5;
+    30% {
+        opacity: 1;
+    }
+
+    70%,
+    86% {
+        transform: rotateY(0);
+        opacity: 1;
+    }
+
+    95%,
+    100% {
+        opacity: 0;
     }
 }
