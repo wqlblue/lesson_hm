@@ -7,3 +7,9 @@ function a() {
 
 }
 a()
+
+
+function foo(a) {
+    console.log(a);
+
+}
