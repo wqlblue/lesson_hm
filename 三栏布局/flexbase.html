@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            list-style: none;
+            width: 200px;
+            height: 50px;
+            /* flex-grow: 1;
+            flex-shrink: 1; */
+            flex: 0 0 200px;
+            /* flex有三个属性 shrink grow bisas */
+        }
+
+        /* li:nth-child(2) {
+            flex-shrink: 0;
+        } */
+
+        ul {
+            width: 700px;
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li style="background-color: aqua;">1</li>
+        <li style="background-color: bisque;">2</li>
+        <li style="background-color: pink;">3</li>
+    </ul>
+</body>
+
+</html>
