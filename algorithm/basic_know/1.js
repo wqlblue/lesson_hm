@@ -7,6 +7,6 @@ function solution(n) {
         console.log(arr[i]);      // n
     }
 }
-// T(n)=1 +n+1 + n +n = 3n+2
+// T(n)=1 +1 +n+1 + n +n = 3n+3
 // 代码执行次数 T(n)
 solution()
