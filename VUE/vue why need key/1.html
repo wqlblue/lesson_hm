@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <div id="app">
+        <ul>
+            <li v-for="item in list" :key="">{{item}}</li>
+        </ul>
+
+
+
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const list = ['1', '2', '3', '4', '5']
+                return {
+                    list
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
