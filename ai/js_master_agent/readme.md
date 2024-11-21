@@ -35,7 +35,7 @@
     
     - height
       font-size :14px
-      line-height :1.4.... 行距 
+      line-height :1.4.... 行距   
 
       .container body?
       css inherit 继承
