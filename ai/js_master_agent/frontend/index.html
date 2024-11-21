@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <!-- 分栏 页面布局 -->
+           
             <div class="col-md-6">
                 <form name="appForm">
                     <div class="form-group">
@@ -35,6 +35,84 @@
 
         </div>
     </div>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coze Logo AIGC</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- 分栏 页面布局 -->
+            <div class="col-md-6">
+                <form name="appForm" id="appForm">
+                    <div class="form-group">
+                        <label for="titleInput">Bot名称：</label>
+                        <input type="text" name="title" class="form-control" placeholder="请输入名称" id="titleInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="descInput">Bot描述：</label>
+                        <textarea name="desc" class="form-control" placeholder="请输入描述" rows="3"
+                            id="descInput"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default btn-primary" id="generateButton">
+                            生成图标
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6" id="imageContainer">
+                <!-- 图片显示区域 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#appForm').on('submit', function (event) {
+                event.preventDefault(); // 阻止表单默认提交行为
+
+                const prompt = $('#descInput').val();
+                if (!prompt.trim()) {
+                    alert('请输入描述信息');
+                    return;
+                }
+
+                console.log('Submitting form with prompt:', prompt); // 添加日志
+
+                $.ajax({
+                    url: 'http://localhost:3000/generate-image',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ prompt: prompt }),
+                    success: function (response) {
+                        console.log('Response received:', response); // 添加日志
+                        if (response.url) {
+                            $('#imageContainer').html(`<img src="${response.url}" alt="Generated Image" class="img-responsive">`);
+                        } else {
+                            $('#imageContainer').html('<p>生成失败，请重试。</p>');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX request failed:', xhr, status, error); // 添加日志
+                        $('#imageContainer').html('<p>请求失败，请检查网络连接或稍后再试。</p>');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
