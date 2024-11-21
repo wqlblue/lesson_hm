@@ -52,3 +52,15 @@
     - 无障碍访问
     input 里的 for 是为了 关联 label 标签。其主要作用是建立标签和表单元素之间的关联。
     当用户点击<label>标签时，浏览器会自动将焦点设置到与之关联的表单元素上。
+
+
+
+
+
+    app.use(express.json());：这一行代码告诉 Express 使用 express.json() 中间件来解析所有带有 Content-Type: application/json 头的请求体。
+
+    express.json() 中间件会自动读取请求体中的数据，并将其解析为一个 JavaScript 对象，然后将这个对象附加到 req 对象的 body 属性上
+
+
+    res.json({ url: imageUrl });：这一行代码将生成的图像 URL 作为 JSON 响应发送回前端。
+  
