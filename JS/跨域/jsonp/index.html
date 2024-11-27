@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <img src="" alt=""> -->
+    <!-- <script src="http://localhost:3000"> </script> -->
+    <!-- // const xhr = new XMLHttpRequest();
+        // xhr.open('GET', 'http://localhost:3000')
+        // xhr.send();
+        // xhr.onreadystatechange = function () {
+
+        //     if (xhr.readyState == 4 && xhr.status == 200) {
+        //         console.log(xhr.responseText);
+        //     }
+
+        // } -->
+    <script>
+        function jsonp(url, cb) {
+            return new Promise(function (resolve, reject) {
+                const script = document.createElement('script');
+                window[cb] = function (data) {
+                    resolve(data);
+                    // 清理全局函数和 script 标签
+                    delete window[cb];
+                    if (script.parentNode) {
+                        script.parentNode.removeChild(script);
+                    }
+                };
+                script.src = `${url}?cb=${cb}`;
+                script.onerror = function () {
+                    reject(new Error('Request failed.'));
+                    if (script.parentNode) {
+                        script.parentNode.removeChild(script);
+                    }
+                };
+                document.body.appendChild(script);
+            });
+        }
+
+        jsonp('http://localhost:3000', 'callback').then(function (res) {
+            console.log(res);
+        }).catch(function (error) {
+            console.error(error);
+        });
+    </script>
+</body>
+
+</html>

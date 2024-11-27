@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>
+        hello
+    </h2>
+    <iframe src="http://127.0.0.1:5500/lesson_hm/JS/%E8%B7%A8%E5%9F%9F/postMessage/detail.html" frameborder="0"
+        width="500" height="500"></iframe>
+    <script>
+        document.getElementById('frame').onload = function () {
+            this.contentwindow.postMessage({
+                name: 'WQL',
+                age: 123
+            }, 'http')
+        }
+    </script>
+</body>
+
+</html>
