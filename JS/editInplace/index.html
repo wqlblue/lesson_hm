@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div id="ep1">
+            <span id="content">男德学院一等奖学金</span>
+            <input type="text" id="input" value="男德学院一等奖学金">
+            <input type="button" id="Save" value="Save">
+            <input type="button" id="Cancel" value="Cancel">
+            <!-- <label for="input">aa</label> -->
+        </div>
+    </div>
+    <script>
+        // dom js html 节点对象
+
+        const content = document.getElementById('content');
+        const input = document.getElementById('input');
+        const Save = document.getElementById('Save');
+        const Cancel = document.getElementById('Cancel');
+
+        let originalContent = ''; // 用于保存原始内容
+
+        //  点击事件
+        content.addEventListener('click', convertToEdit);
+        Save.addEventListener('click', convertText);
+        Cancel.addEventListener('click', convertToEditCancel);
+
+        function convertToEditCancel() {
+            // 恢复原始内容
+            content.innerHTML = originalContent;
+            input.style.display = 'none';
+            Save.style.display = 'none';
+            Cancel.style.display = 'none';
+            content.style.display = 'inline';
+        }
+
+        //  编辑状态
+        function convertText() {
+            input.style.display = 'none';
+            Save.style.display = 'none';
+            Cancel.style.display = 'none';
+            content.style.display = 'inline';
+            //  点击保存后  把输入框的内容 赋值给 content
+            content.innerHTML = input.value;
+        }
+
+        function convertToEdit() {
+            // 保存原始内容
+            originalContent = content.innerHTML;
+            input.style.display = 'inline';
+            Save.style.display = 'inline';
+            Cancel.style.display = 'inline';
+            content.style.display = 'none';
+            //  点击编辑后  把 content 的内容 赋值给 input
+            input.value = content.innerHTML;
+        }
+
+        // 初始化页面时调用 convertText() 以显示初始内容
+        convertText();
+    </script>
+</body>
+
+</html>

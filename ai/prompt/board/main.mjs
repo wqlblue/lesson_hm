@@ -5,8 +5,8 @@ dotenv.config()
 
 const client = new OpenAI({
     // node 里的进程对象
-    apiKey: process.env.OPENAI_API_KEY,
-    baseURL: process.env.OPENAI_BASE_URL
+    apiKey: process.env.API_KEY,
+    baseURL: process.env.BASE_URL
 })
 // es6 默认参数值
 // 通用的LLM 聊天完成接口函数， 复用
@@ -42,8 +42,13 @@ const main = async () => {
         const prompt = `
     Tell me what language this is : "${issue}"
   `
-        const response = await getCompletion(prompt)
-        console.log(response)
+        const countryLanguage = await getCompletion(prompt)
+        // console.log(response)
+        const resultPrompt = `
+      帮我翻译以下的文字到中文, "${issue}"
+    `
+        const result = await getCompletion(resultPrompt)
+        console.log(`${countryLanguage}, 翻译结果是: ${result}`)
     }
     // console.log(issue);
 

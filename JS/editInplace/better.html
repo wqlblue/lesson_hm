@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div id="ep1"></div>
+    </div>
+    <script src="./editinplace.js"></script>
+    <script>
+        // 流程代码走向面向对象的封装  
+        new Editinplace(
+            'ep1',
+            document.getElementById('app'),
+
+        )
+        new Editinplace(
+            'ep2',
+            document.getElementById('app'),
+            '好嗨哟'
+        )
+    </script>
+</body>
+
+</html>
