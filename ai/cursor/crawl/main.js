@@ -34,8 +34,8 @@ request(url)
             ]
         });
 
-        // 写入CSV文件
         csvWriter.writeRecords(hotList)
+            // 写入CSV文件  
             .then(() => console.log('CSV file has been saved.'))
             .catch(err => console.error('Error writing CSV file:', err));
     })
