@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "谭弘权"
+    },
+    {
+      "id": "2",
+      "name": "熊凯闻"
+    },
+    {
+      "id": "3",
+      "name": "王睿"
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "React Hooks 入门",
+      "author": "1",
+      "comments": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "REACT + JSON-Server 全栈快跑",
+      "content": "react component ",
+      "userId": 2
+    },
+    {
+      "id": "f910",
+      "name": "aaa"
+    },
+    {
+      "id": "2",
+      "title": "REACT + JSON-Server 全栈快跑",
+      "content": "react component ",
+      "userId": 2
+    }
+  ]
+}
