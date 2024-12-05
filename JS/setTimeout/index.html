@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn1">提前关闭setTimeout</button>
+    <button id="btn">关闭</button>
+    <script>
+        //因为是全局代码，所以是先执行全局JS，遇到了setTimeout函数，将其放到延时队列，然后是输出2， 
+        //setTimeout函数计时器到了时间再把他放到渲染主线程中，就算计时器里的数是0，也需要先把他放到延时队列中
+
+
+        setTimeout(() => {
+            console.log('setTimeout');
+
+        }, 10000);   // 浏览器中，最小延迟时间是4ms，即使你设置的是0，也是4ms
+        // console.log(123);
+        // // 同步代码
+        // while (true) {
+
+        // }
+        const btn1 = document.getElementById('btn1');
+        btn1.onclick = () => {
+            clearTimeout(timeout);
+        }
+
+
+
+        const interval = setInterval(() => {
+            // console.log('setInterval');
+        }, 1000);
+        const btn = document.getElementById('btn');
+        btn.onclick = () => {
+            clearInterval(interval);
+        }
+
+        function throttle(fn, t) {
+            let timer = null;
+            return function () {
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn()
+                        timer = null;
+                    }, 1000);
+                }
+            }
+        }
+        function debounce(fn, t) {
+            let timer;
+            return function () {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                let timer = setTimeout(() => {
+                    fn()
+                }, 1000);
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
