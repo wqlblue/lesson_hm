@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this more</title>
+</head>
+
+<body>
+    <script>
+        var name = "windowName";
+        var a = {
+            name: "xwq",
+            fun1: function () {
+                setTimeout((function () {
+                    //箭头函数没有this
+                    this.fun1()
+                    //手动指定 this 的指向
+                    //call编译阶段
+                }), 100)
+            }
+        }
+        a.func2()
+    </script>
+
+</body>
+
+</html>
