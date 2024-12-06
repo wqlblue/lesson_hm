@@ -12,20 +12,44 @@
         <label for="unDebounceInput">用户搜索</label>
         <input type="text" id="unDebounceInput" placeholder="请输入要搜索的用户名字">
     </div>
+    <ul id="users"></ul>
     <script>
-        // 通往后端接口
+        const oUL = document.querySelector('#users');
         const oInput = document.getElementById('unDebounceInput');
-        oInput.addEventListener('keyup', function () {
-            const value = this.value
+
+        // 使用箭头函数以避免 this 上下文问题
+        const handleNameSearch = () => {
+            let value = oInput.value.trim();
+            if (value === '') {
+                oUL.innerHTML = '';
+                return;
+            }
             fetch('http://localhost:3001/users')
                 .then(res => res.json())
                 .then(users => {
-                    const filterUsers = users.filter(
-                        user => user.name.includes(value)
-                    )
-                    console.log(filterUsers)
+                    const filterUsers = users.filter(user => user.name.includes(value));
+
+                    oUL.innerHTML = filterUsers.map(user =>
+                        `<li>${user.name}</li>`
+                    ).join(''); // 使用 join('') 来连接数组元素形成字符串
                 })
-        })
+                .catch(error => console.error('Error fetching users:', error));
+        }
+
+        function debounce(fn, delay) {
+            let timer;
+            return function (...args) { // 确保参数可以正确传递给fn
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(() => {
+                    fn.apply(this, args); // 保留原函数的this和参数
+                }, delay);
+            }
+        }
+
+        // 直接绑定 handleNameSearch，不需要改变 this 上下文
+        oInput.addEventListener('keyup', debounce(handleNameSearch, 1000));
     </script>
 </body>
 
