@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 为什么要有Symbol 呢? 放心加进去,绝对不会重复
+        const wes = Symbol('wes');
+
+        const classMate = {
+            // 字符串覆盖
+            "cw": 1,
+            "cw": 2,
+            // symbol  可以替代 字符串作为key
+            [Symbol("mark")]: { grade: 50, gender: "male" },
+            [Symbol("olivia")]: { grade: 50, gender: "female" },
+            [Symbol("olivia")]: { grade: 50, gender: "female" }
+
+        }
+        console.log(classMate[name], classMate.cw, classMate);
+        for (let [key, val] of Object.entries(classMate)) {
+            console.log(key, val);
+        }
+
+        for (const person in classMate) {
+            console.log(person);
+        }
+
+        const syms = Object.getOwnPropertySymbols(classMate);
+        console.log(syms);
+
+
+        const data = syms.map(sym => classMate[sym].grade);
+        console.log(data);
+
+        const a = Reflect.ownKeys(classMate);
+        console.log(a);
+        let obj = { foo: 123 };
+        console.log(
+            Object.getOwnPropertyDescriptors(classMate)
+        );
+
+    </script>
+</body>
+
+</html>

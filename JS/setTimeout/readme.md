@@ -20,4 +20,7 @@
 
  - call
  
- 
+- 为什么 timeout.html 只输出了四次？
+
+尽管 setTimeout(() => { interval(); }, 5000) 和 customSetTimeout 中的 setTimeout 都是宏任务，但在某些情况下，浏览器可能会优先处理 setTimeout(() => { interval(); }, 5000)，因为它是一个单独的任务，而不是一个递归的任务链。这可能导致 setTimeout(() => { interval(); }, 5000) 在第五个 setTimeout 之前被处理，从而取消了第五个 setTimeout。
+
