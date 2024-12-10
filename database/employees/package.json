@@ -1,0 +1,15 @@
+{
+  "name": "employees",
+  "version": "1.0.0",
+  "description": "- 姓名",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

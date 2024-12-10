@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = {
+            name: 'Cherry',
+            fn: function (a, b) {
+                console.log(this.name)
+                console.log(a + b)
+            }
+        }
+        // a.fn(1, 2)
+        var b = a.fn;
+
+        // call apply 区别
+        // apply 是将参数放到一个数组里面  它可以动态传入参数
+        // call 一个个给 call(thisBinder, arg1, arg2, arg3,...)
+
+        // 立即执行 指定this 传入的参数是数组   它可以动态传入参数  
+        console.log(b.apply(a, [1, 2]));  //本身不会返回任何值  只是改变了this的指向
+        console.log(b.call(a, [1, 2]));   //本身不会返回任何值  只是改变了this的指向
+
+        // a [1,2] + undefined
+        // + 两边都是数字都是加法， 如果不是呢？连接运算符
+
+        // 为什么是 12undefined？
+
+        // 1.+ 两边都是数字：执行 加法运算，返回数值结果。
+        // 2.+ 两边有一个或两个操作数是字符串：执行 字符串连接，返回字符串结果。
+        //   混合类型：JavaScript 会根据操作数的类型进行隐式类型转换，优先将非字符串的操作数转换为字符串，
+        //   然后进行连接；如果两个操作数都不是字符串，则尝试将它们转换为数字，再执行加法。
+
+        console.log(b.bind(a, 1, 2)());
+
+    </script>
+</body>
+
+</html>
