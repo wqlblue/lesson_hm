@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿里双11</title>
+    <script>
+        // 阻塞 来动态设置 html font-size
+        (function () {
+            // console.log('立即执行函数')
+            function calc() {
+                let html = document.documentElement //它返回当前文档的根元素，即 <html> 元素
+                let w = html.clientWidth
+                html.style.fontSize = (w / 750) * 75 + 'px'
+            }
+            calc()
+            window.addEventListener('resize', calc)
+        })()
+
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width: 10rem;height: 2rem; background-color: red;"></div>
+    <div style="font-size: 0;">
+        <div
+            style="width: 5rem;height: 2rem; background-color: skyblue; display:inline-block; font-size: 20px; vertical-align: top;">
+            111
+        </div>
+        <div style="width: 5rem;height: 2rem; background-color: blue; display:inline-block;vertical-align: top">222
+        </div>
+    </div>
+    <!-- 行内元素（如 span、a 等）和 inline-block 元素都位于同一行内，
+    并且它们之间的空白字符会被渲染为一个空格。这个空格的宽度取决于父元素的字体大小
+    （font-size），因为它是基于文本的间距规则来计算的。 -->
+
+    <!-- 另一种常见的方法是将父元素的 font-size 设置为 0。
+     由于 inline-block 元素之间的间隔是基于父元素的字体大小计算的，
+     将 font-size 设置为 0 可以有效地消除这个间隔。 -->
+</body>
+
+</html>
