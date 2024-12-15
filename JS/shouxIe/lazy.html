@@ -56,7 +56,7 @@
         // el.removeAttribute('data-original') 
         let viewHeight = window.innerHeight
         function lazyLoad() {
-            let imgs = document.querySelectorAll('img[data-original]')
+            let imgs = document.querySelectorAll('img[data-original]')  //  'img[data-original]' 是一个 属性选择器，
             imgs.forEach(el => {
                 let rect = el.getBoundingClientRect()
                 if (rect.top < viewHeight) {
@@ -75,6 +75,25 @@
 
     </script>
 
+</body>
+
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+    </script>
 </body>
 
 </html>

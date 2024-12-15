@@ -1,0 +1,28 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "- vite和webpack的区别\r   - vite更快，更年轻 vue 尤雨溪推荐\r   - webpack比较复杂，定制性和功能更强大\r   - 工程化套件\r   - 开发阶段，\r     打包阶段\r     上线阶段\r   - stylus -> css\r   - ts -> js\r   - js -> es6+ -> es5\r   - .vue -> loader plugin",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --open"
+  },
+  "dependencies": {
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4",
+    "html-webpack-plugin": "^5.5.0",
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "style-loader": "^3.3.2",
+    "vue-loader": "^17.0.0",
+    "vue-template-compiler": "^2.7.15"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
