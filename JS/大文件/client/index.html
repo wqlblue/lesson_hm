@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" onchange="handleFileChange(event)" id="input">
+    <button id="btn">上传</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const input = document.getElementById('input');
+        const btn = document.getElementById('btn');
+        btn.addEventListener('click', handleUpload);
+        let fileobj = {}
+        // 读取本地文件
+        function handleFileChange(event) {
+            console.log(event.target.files);
+            let [File] = event.target.files;
+            fileobj = File
+        }
+
+        function handleUpload() {
+            if (!fileobj) return;
+            const chunkList = createChunk(fileobj); // 分割文件,变成一个个小片段
+            console.log(chunkList);
+            // 发请求
+            axios.post()
+
+        }
+        function createChunk(file, size = 1024 * 1024 * 5) {
+            const chunkList = [];
+            let cur = 0;
+            while (cur < file.size) {
+                chunkList.push({ file: file.slice(cur, cur + size) })
+                cur += size;
+            }
+            return chunkList;
+        }
+    </script>
+</body>
+
+</html>
