@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 3 Example</title>
+    <!-- 使用 CDN 引入 Vue 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <!-- Vue 3 工作的挂载点 -->
+    <div id="root">
+        <p>Count: {{ count }}</p>
+        <button @click="increment">Increment</button>
+    </div>
+
+    <script type="module">
+        // 导入 Vue 和 ref
+        import { createApp, ref } from 'https://cdn.jsdelivr.net/npm/vue@3/dist/vue.esm-browser.js';
+
+        // 创建 Vue 应用
+        const app = createApp({
+            setup() {
+                // 定义响应式状态
+                const count = ref(0);
+
+                // 定义方法
+                function increment() {
+                    count.value++;
+                }
+
+                // 返回需要暴露给模板的对象
+                return {
+                    count,
+                    increment
+                };
+            }
+        });
+
+        // 挂载应用到具有 ID 为 'root' 的 DOM 元素
+        app.mount('#root');
+    </script>
+</body>
+
+</html>
