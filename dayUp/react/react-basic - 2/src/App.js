@@ -13,7 +13,7 @@
 // }
 // export default App;
 
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 
 
@@ -234,3 +234,87 @@ import { useEffect } from "react";
 
 
 // useEffect 清楚副作用
+
+// import React, { useState, useEffect } from 'react'
+// function Son() {
+//   useEffect(() => {
+//     let timer = setInterval(() => {
+//       console.log('定时器');
+//     }, 1000)
+
+//     return () => {
+//       clearInterval(timer)
+//     }
+//   }, [])
+//   return (
+
+//     <div>
+//       this is son
+//     </div>
+//   )
+// }
+// function App() {
+//   const [show, setShow] = useState(true)
+//   return (
+//     <div>
+//       {show && <Son />}
+//       <button onClick={() => setShow(!show)}>卸载</button>
+//       this is app
+//     </div>
+//   )
+// }
+
+// export default App;
+
+
+
+
+
+
+// 封装自定义Hook
+// 1. 声明一个由use打头的函数
+// 2. 在函数内部封装可复用的逻辑
+// 3. 把组件中用到的状态或者回调return出去 （以对象或者数组）
+// 4. 在哪个组件要用到这个逻辑，就执行这个函数，结构出来的状态和回调进行使用
+// import React, { useState } from 'react';
+
+
+// function useToggle() {
+//   const [value, setValue] = useState(true)
+//   const toggle = () => setValue(!value)
+//   return [value, toggle]
+// }
+// function App() {
+//   // const [value, setValue] = useState(true)
+
+//   // const toggle = () => setValue(!value)
+//   const [value, toggle] = useToggle()
+//   return (
+//     <div>
+//       {value && <div> aa </div>}
+//       <button onClick={toggle}>toggle</button>
+//     </div>
+//   )
+// }
+// export default App; 
+
+
+
+
+
+// HOOk 不能用在哪里
+// 1. 条件判断 
+// 2  组件外
+
+import { useState } from "react";
+// useState()
+function App() {
+
+  return (
+
+    <div>
+      APP
+    </div>
+  )
+}
+export default App;
