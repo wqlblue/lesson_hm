@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D 地球</title>
+    <!-- 引入最新版本的 Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #info {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+            display: block;
+        }
+
+        #info a {
+            font-family: Monospace;
+            font-size: 13px;
+            color: #000;
+            padding: 0.5em;
+            background: #fff;
+            border-radius: 0.5em;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="info">
+        <a href="https://threejs.org" target="_blank">Three.js</a> - 3D Earth
+    </div>
+    <canvas id="webglcanvas"></canvas>
+    <script>
+        let canvas,
+            camera,
+            scene,
+            renderer,
+            group,
+            mesh;
+
+        let mouseX = 0;
+        let mouseY = 0;
+        let windowHalfX = window.innerWidth / 2;
+        let windowHalfY = window.innerHeight / 2;
+
+        init();
+        animate();
+
+        function init() {
+            // 初始化画布
+            canvas = document.getElementById('webglcanvas');
+
+            // 初始化相机
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+            camera.position.z = 500;
+
+            // 初始化场景
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xffffff);
+
+            // 初始化组
+            group = new THREE.Group();
+            scene.add(group);
+
+            // 加载纹理
+            const loader = new THREE.TextureLoader();
+            loader.load(
+                './earth.jpg', // 确保这里是你地球纹理图片的正确路径
+                function (texture) {
+                    // 创建几何体
+                    const geometry = new THREE.SphereGeometry(200, 32, 32);  // 更细分的球体
+
+                    // 创建材质
+                    const material = new THREE.MeshStandardMaterial({
+                        map: texture,
+                        roughness: 0.5, // 调整粗糙度
+                        metalness: 0.1  // 调整金属感
+                    });
+
+                    // 创建网格
+                    mesh = new THREE.Mesh(geometry, material);
+                    group.add(mesh);
+
+                    // 添加灯光
+                    const light = new THREE.DirectionalLight(0xffffff, 1);
+                    light.position.set(50, 50, 50).normalize();
+                    scene.add(light);
+                },
+                undefined, // onProgress callback
+                function (error) {
+                    console.error('An error happened.', error);
+                }
+            );
+
+            // 初始化渲染器
+            renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                antialias: true,
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            // 监听窗口大小变化
+            window.addEventListener('resize', onWindowResize, false);
+
+            // 监听鼠标移动
+            document.addEventListener('mousemove', onDocumentMouseMove, false);
+        }
+
+        function onWindowResize() {
+            windowHalfX = window.innerWidth / 2;
+            windowHalfY = window.innerHeight / 2;
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - windowHalfX) * 0.25;
+            mouseY = (event.clientY - windowHalfY) * 0.25;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // 更新相机位置以跟随鼠标
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            // 渲染
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+
+</html>

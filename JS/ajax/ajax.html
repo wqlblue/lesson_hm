@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Members</title>
+</head>
+
+<body>
+    <h1>GitHub Organization Members</h1>
+    <ul class="memberList"></ul>
+
+    <script>
+        const oUL = document.querySelector('.memberList');
+
+        // 创建一个新的 XMLHttpRequest 对象
+        var xhr = new XMLHttpRequest();
+
+        // 配置请求
+        xhr.open('GET', 'https://api.github.com/orgs/lemoncode/members', true); // 异步请求
+
+
+        // 监听 readyState 变化
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) { // 请求完成
+                if (xhr.status >= 200 && xhr.status < 300) { // 请求成功
+
+                    let res = JSON.parse(xhr.responseText);
+                    console.log('Members:', res);
+
+                } else { // 请求失败
+                    console.error('Error:', xhr.statusText);
+                }
+            }
+        };
+
+        // 发送请求
+        xhr.send();
+    </script>
+</body>
+
+</html>
