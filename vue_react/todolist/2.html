@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2 id="app">{{title}}</h2>
+        <input type="text" id="todo-input" v-model=" title">
+    </div>
+    <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+        const app = {
+            // VUE 2.0
+            data() {
+                return {
+                    title: 'hello world'
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app')
+    </script>
+</body>
+
+</html>
