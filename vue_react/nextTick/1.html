@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        h2 {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2 ref="h2Ref">
+            {{ message }}
+        </h2>
+        <button @click="updateMessage">更新</button>
+    </div>
+
+    <script>
+        const { createApp, ref, onMounted, nextTick } = Vue;
+
+        createApp({
+            setup() {
+                const message = ref('Hello vue!');
+                const h2Ref = ref(null);
+                onMounted(() => { //这是因为在 setup() 函数的顶部，Vue 还没有完成组件的挂载和渲染，因此 ref 引用的 DOM 元素还没有被创建。
+                    console.log(h2Ref.value.clientWidth);
+                })
+
+                const updateMessage = () => {
+                    message.value = '更新后的信息';
+                    nextTick(() => {  // 保证内部代码会在页面渲染完成之后被调用
+                        console.log(h2Ref.value.clientWidth);
+                    })
+                }
+
+                return {
+                    message,
+                    h2Ref,
+                    updateMessage
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
