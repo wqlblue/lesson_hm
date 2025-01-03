@@ -1,6 +1,9 @@
 <script setup>
 import LifecycleComponent from './components/LifecycleComponent.vue';
 import { ref } from 'vue';
+
+// option 选项式api -> 组合式 composition api
+
 const count = ref(0);
 const showComponent = ref(true); // 
 const width = ref(100);
@@ -16,6 +19,7 @@ const toggleComponent = () => {
 const incrementCount = () => {
   count.value++;
 }
+
 </script>
 
 <template>
