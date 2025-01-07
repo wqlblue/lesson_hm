@@ -1,6 +1,6 @@
 <template>
     <div>
-        home
+        post-meta
     </div>
 </template>
 
@@ -8,4 +8,4 @@
 
 </script>
 
-<style lang="css" scoped></style>
+<style lang="scss" scoped></style>

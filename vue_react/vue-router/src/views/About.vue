@@ -1,13 +1,19 @@
 <template>
     <div>
-        about
+        About
+        <button @click="goHome">回到首页</button>
     </div>
 </template>
 
 <script setup>
-
+import { useRouter } = 'vue-router'
+const router = useRouter()
+const goHome = () => {
+    // js 跳转  
+    // Browser Object Model > DOM   
+    //BOM API 
+    window.location.href = "/"
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style scoped></style>

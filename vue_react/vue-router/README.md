@@ -20,6 +20,23 @@
    - index.js 入口配置文件
    - router-link 是  vue-router 提供的组件
 
+- 业务熟练度
+   - vue-router 语法细节
+      - routes  拆分 亮点
+      [
+        /
+        /ABOUT 顶级路径
+        ... Users // 用户模块
+        ... Posts // 文章模块
+      ]
+      展开运算符
+   - path,component
+     - name  跳转用 :to ="{'name  '}"   
+     - props 路由传参
+  
+   - 路由历史记录 history
+     router-link 而不是a组件
+
 
 
 
