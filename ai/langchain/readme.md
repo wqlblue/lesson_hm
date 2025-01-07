@@ -16,3 +16,8 @@
   - 定义了langchain中的数据结构，预置
   - HumanMessage
   - SystemMessagex
+- langchaning.prompts
+ - 进入AI全栈领域的标志
+ - 核心模块，prompt 是主要工作
+ - PromptTemplate
+    
