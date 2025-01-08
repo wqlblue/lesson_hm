@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模版编译</title>
+</head>
+
+<body>
+    <!-- 用于显示编译后的结果 -->
+    <div id="output"></div>
+
+    <script>
+        // 模板字符串
+        let template = '我是{{name}}, 年龄{{age}}，性别{{sex}}';
+
+        // 数据对象
+        let person = {
+            name: '嘎兰',
+            age: 12,
+            sex: '女'
+        };
+
+        // 模板编译函数
+        function compile(template, data) {
+
+            // 正则表达式用于匹配 {{variable}}
+            const reg = /\{\{(\w+)\}\}/;
+
+            // 递归
+            while (reg.test(template)) {
+                // 匹配到的变量名
+                const variable = reg.exec(template)[1];  // 拿到变量名
+
+                // 替换模板中的变量
+                template = template.replace(reg, data[variable]);
+            }
+        }
+
+        // 编译模板并输出到页面
+        const result = compile(template, person);
+        document.getElementById('output').innerHTML = result;
+    </script>
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
