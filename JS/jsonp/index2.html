@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <ul id="list">
+
+    </ul>
+    <script>
+        let list = document.getElementById('list');
+        // fetch('http://127.0.0.1:3000')
+        // console.log(require);
+        let jsonp = (url) => {
+            let oScript = document.createElement('script');
+            oScript.src = url;
+            document.body.appendChild(oScript);
+            window.callback = (data) => {
+                list.innerHTML = data.map(user => `<li>
+      ${user.name}
+      </li>`).join('');
+            }
+        }
+        jsonp('http://localhost:3000/')
+    </script>
+
+</body>
+
+</html>

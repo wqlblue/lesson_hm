@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch Data Example</title>
+</head>
+
+<body>
+    <h1>Simple Fetch Example</h1>
+    <!-- 用于显示来自服务器的消息 -->
+    <div id="message"></div>
+    <button id="btn">请求</button>
+
+    <script>
+        // 使用fetch API来获取数据
+        async function fetchData() {
+            try {
+                const response = await fetch('http://localhost:3000');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.text(); // 获取文本数据
+                document.getElementById('message').textContent = data; // 显示数据
+                console.log(data);
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+        }
+
+        // 当按钮被点击时调用fetchData函数
+        document.getElementById('btn').addEventListener('click', fetchData);
+        // 页面加载时自动调用fetchData函数
+        window.onload = fetchData;
+    </script>
+</body>
+
+</html>

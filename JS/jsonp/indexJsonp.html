@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch Data Example</title>
+</head>
+
+<body>
+    <h1>Simple Fetch Example</h1>
+    <!-- 用于显示来自服务器的消息 -->
+    <div id="message"></div>
+    <button id="btn">请求</button>
+
+    <script>
+        // 使用JSONP获取数据
+        function fetchJsonp() {
+            try {
+                // 创建一个唯一的回调函数名
+                const callbackName = `jsonpCallback_${new Date().getTime()}`;
+
+                // 动态定义全局回调函数
+                window[callbackName] = function (data) {
+                    document.getElementById('message').textContent = data.name; // 显示数据中的name字段
+                    console.log(data);
+                    delete window[callbackName]; // 请求完成后删除该函数 1.防止内存泄漏 2.防止全局污染
+                };
+
+                // 动态创建<script>标签
+                const script = document.createElement('script');
+                // URL中包含callback参数，指定服务器应使用的回调函数名
+                script.src = `http://localhost:3000?callback=${encodeURIComponent(callbackName)}`;
+                document.body.appendChild(script);
+            } catch (error) {
+                console.error('There was a problem with the JSONP request:', error);
+            }
+        }
+
+        // 当按钮被点击时调用fetchJsonp函数
+        document.getElementById('btn').addEventListener('click', fetchJsonp);
+
+        // 页面加载时自动调用fetchJsonp函数
+        window.onload = fetchJsonp;
+    </script>
+</body>
+
+</html>
