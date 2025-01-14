@@ -13,9 +13,29 @@ import type { RouteRecordRaw } from 'vue-router'
 // ：生命一个类型 RouteRecordRaw 是一个类型  RouteRecordRaw[] 是一个数组
 const rootRoutes: RouteRecordRaw[] = [
     {
-        path: '/home',
+        path: 'home',
         name: 'Home',
-        component: () => import("../views/HomePage/HomePage.vue")
+        meta: {
+            cache: true
+        },
+        component: () => import("../views/HomePage/Home.vue")
+    },
+    {
+        path: 'detail',
+        name: 'Detail',
+        meta: {
+            cache: false
+        },
+        component: () => import("../views/DetailPage/DetailPage.vue")
+
+    },
+    {
+        path: 'discount',
+        name: 'Discount',
+        meta: {
+            cache: false
+        },
+        component: () => import("../views/Discount/Discount.vue")
     },
 ]
 
