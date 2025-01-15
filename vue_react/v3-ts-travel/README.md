@@ -9,6 +9,9 @@
 
     }
     - .vue文件中 加入 lang='ts' 支持
+    - interface 接口  也可以用于类型定义
+         - login 页面 使用interface  声明了LoginInfo
+         包含 username password 两个字段
 - 工程化 vite 
     - 快    
     - 先编译再运行
@@ -29,7 +32,10 @@
     - 组件开发文档
     - 学习到很多组件的写法，比如具名插槽
         - 组件的定制性
-        -   
+        - van-search keep-alive
+        - van-field van-form      
+        - 组件使用  项目正在使用的UI 组件库 公司的开发文档
+
 - hooks useRouter  手写自定义一个hook
 - 高质量的组件
 - tailwindcss 界面  css能力较强
@@ -39,7 +45,10 @@
     - bg-gradient-to-b from-red-500 to-blue-500  渐变色
     - 如果不用渐变，就要用图片 (发送http请求 + 图片比较大)
     - flex
-       flex-col
+       flex-direction flex-wrap flex-flow 
+    - 了解@apply 的进阶功能
+         tailwind 缺点是类名要写一大堆
+         可以用@apply 可以把一堆类名交给一个类  放在css/common.css 复用
 - html5 的能力点
    语义化标签
      main
@@ -51,6 +60,14 @@
         import * as xxx from './xxx'
         import R,{x,y} from  ''
         import type R 
+- css
+   - css flex: 0 0 auto col flex-end fle:1
+   - gradient
+   - tailwind AI 结合 语义化
+
+-  组件化思想
+      - 复用
+      - 降低页面的复杂性 代码可维护性提升
 
 - es6语法考点安排
   - 插槽
@@ -74,6 +91,9 @@
         - gradient
         - vite vant
         - keep-alive
+             exclude
+          - computed 计算属性 + useRouter
+               router.allRoutes.filter.map()
   - 防抖节流
 
   - 项目写法
@@ -83,5 +103,15 @@
        - vant
        - html5
        - pinia toRefs()  流程
+
+- 首页功能介绍
+- 登入页面介绍
+   - van-form model rule
+   -  van-field checkbox 自定义
+      template#input
+      van-checkbox v-model="checked"
+      说明...
+   - ts interface 约束 LoginInfo
+        ref<Boolean>
 
  

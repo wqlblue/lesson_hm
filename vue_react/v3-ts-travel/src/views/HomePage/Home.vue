@@ -31,9 +31,29 @@
                         </div>
                     </div>
                 </section>
+                <van-button type="primary" block size="small"
+                color="rgb(246,247,248)">
+                      <div class="text-black flex">
+                        <van-icon name="apps-o" size="1rem" />
+                        <span class="test-xs ml-2 font-bold">所有分类</span>
+                      </div>
+                </van-button>
             </header>
-
-        </main>
+            <section class="navbar flex overflow-x-scroll w-screen space-x-4 px-4" >
+              <div class="navbar-item flex flex-col border rounded-lg overflow-hidden flex-[0_0_auto] w-24"
+     v-for="item in navBarState"
+     :key="item.title">
+    <div class="navbar-item__text text-xs p-2 pb-0">
+        {{item.title}}
+    </div>
+    <div class="navbar-item__icon self-end p-2">
+        <van-icon :name="item.icon" size="1.5rem"/>
+    </div>
+</div>
+<h2 class="title">最近浏览</h2>
+<RecentlyViewCard  :items="recentlyViewedState" />
+            </section>
+      </main>
       
 
     </div>

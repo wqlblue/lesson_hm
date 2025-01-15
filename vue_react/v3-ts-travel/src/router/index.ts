@@ -46,6 +46,12 @@ const routes: RouteRecordRaw[] = [
         component: () => import("../views/TheRoot.vue"),
         redirect: '/home',
         children: rootRoutes
+    }, {
+        path: '/login',
+        name: 'Login',
+        component: () => import("../views/Login.vue")
+
+
     }
 ]
 
