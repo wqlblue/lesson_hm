@@ -1,0 +1,9 @@
+{
+    "presets": [
+        "@babel/preset-env", // 转换现代 JavaScript 到指定的目标环境中兼容的形式
+        "@babel/preset-react" // 支持 JSX 转换和 React 相关特性
+    ],
+    "plugins": [
+        // 在这里添加额外的 Babel 插件
+    ]
+}
