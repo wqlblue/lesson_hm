@@ -12,6 +12,11 @@
     - interface 接口  也可以用于类型定义
          - login 页面 使用interface  声明了LoginInfo
          包含 username password 两个字段
+    - 组件约束props 时候
+        interface props{
+            username: string;
+        }
+    -  函数参数要给类型参数    
 - 工程化 vite 
     - 快    
     - 先编译再运行
@@ -68,6 +73,8 @@
 -  组件化思想
       - 复用
       - 降低页面的复杂性 代码可维护性提升
+         - props 父子数据通信
+         - 组件只需要负责显示，性能更好
 
 - es6语法考点安排
   - 插槽
@@ -103,6 +110,17 @@
        - vant
        - html5
        - pinia toRefs()  流程
+       - 项目架构
+          - src 开发目录
+            - router
+            - assets
+            - store
+            - views
+            - components
+            - utils
+            - types
+            - api 
+            - hooks
 
 - 首页功能介绍
 - 登入页面介绍

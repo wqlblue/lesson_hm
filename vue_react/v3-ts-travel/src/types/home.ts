@@ -7,7 +7,7 @@ export type HomeTopBarItem = {
     icon: string
 }
 
-export type recentlyViewedState = {
+export type recentlyViewItem = {
     cover: string,
     title: string,
     price: number

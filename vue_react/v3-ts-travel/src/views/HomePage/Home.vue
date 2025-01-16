@@ -50,7 +50,10 @@
         <van-icon :name="item.icon" size="1.5rem"/>
     </div>
 </div>
-<h2 class="title">最近浏览</h2>
+
+            </section>
+            <section>
+              <h2 class="title">最近浏览</h2>
 <RecentlyViewCard  :items="recentlyViewedState" />
             </section>
       </main>
@@ -59,6 +62,7 @@
     </div>
   </template>
   <script setup lang="ts">
+  import RecentlyViewCard from '@/components/RecentlyViewCard.vue'
     // 数据？
     // pinia 数据管理 + 组件显示
     import { toRefs,ref  } from 'vue'
