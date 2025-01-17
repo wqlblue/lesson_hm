@@ -10,4 +10,8 @@ const service = axios.create({
     timeout: 5000   // 超时时间  
 })
 
+service.interceptors.request.use(config => {
+    return config
+})
+
 export default service

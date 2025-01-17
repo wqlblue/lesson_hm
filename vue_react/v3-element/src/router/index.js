@@ -1,12 +1,17 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory
+} from "vue-router";
+// import Home from '../page/Home.vue'
+import About from '../page/About.vue'
+import Login from '../page/Login.vue'
 
 // 路由配置数组
-const routes = [
+const routers = [
   {
     path: '/',
     name: 'Home',
-    // 路由懒加载
-    component: () => import('../pages/Home.vue'),
+    component: () => import('../page/Home.vue'),// 路由懒加载
     meta: {
       title: '首页',
       requireLogin: true
@@ -15,41 +20,43 @@ const routes = [
       {
         path: 'about',
         name: 'About',
-        component: () => import('../pages/About.vue'),
+        component: () => import('../page/About.vue'),
         meta: {
           title: '关于',
-          requireLogin: true
-        },
+          requireLogin: false
+        }
       }
     ]
   },
   {
     path: '/login',
-    component: () => import('../pages/Login.vue'),
-    name: 'login',
+    component: () => import('../page/Login.vue'),
+    name: 'Login',
     meta: {
-      title: '登陆',
+      title: '登录',
       requireLogin: false
     }
   }
 ]
-
-// 实例化路由对象
-const router = createRouter(
-  {
-    history: createWebHistory(),
-    routes
-  }
-)
+// 创建路由
+const router = createRouter({
+  history: createWebHistory(),
+  routes: routers
+})
 
 // 路由守卫
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || "掘金"
+  document.title = to.meta.title || '掘金'; // 动态设置标题
   if (to.meta.requireLogin) {
-    next('/login')
-    return
+    // 登录验证
+    if (localStorage.getItem('token')) {
+      next()
+      return
+    } else {
+      next('/login')
+      return
+    }
   }
   next()
 })
-
-export default router 
+export default router;

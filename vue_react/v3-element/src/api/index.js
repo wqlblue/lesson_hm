@@ -9,3 +9,6 @@ export const login = (body) => request.post('/api/login', body).then(res => {
     console.log(res);
 });
 
+export const getUserInfo = () => request.get('/api/getUserInfo').then(res => {
+    return res;
+})

@@ -7,10 +7,10 @@
     label-width="auto"
   >
     <el-form-item label="Name" prop="name">
-      <el-input v-model="form.name" size="small" autocomplete="off"></el-input>
+      <el-input v-model="form.name" for="Name" size="small" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="Password" prop="password">
-      <el-input v-model="form.password" type="password" size="small" autocomplete="off"></el-input>
+      <el-input v-model="form.password" for="password" type="password" size="small" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="onSubmit" :loading="loading">
@@ -22,54 +22,55 @@
 
 <script setup>
 import { reactive, ref } from 'vue';
-import { login } from '../api/index'; // 确保路径正确
+import { login } from '../api/';
+import { useRouter } from 'vue-router';
 
+const router = useRouter(); // hooks 编程
 const formRef = ref(null);
+// 表单数据
 const form = reactive({
   name: '',
   password: ''
 });
 const rules = {
-  name: [
-    { required: true, message: '请输入用户名', trigger: 'change' },
-    { min: 5, max: 10, message: '长度在5-10个字符', trigger: 'change' }
-  ],
-  password: [
-    { required: true, message: '请输入密码', trigger: 'change' },
-    { min: 5, max: 10, message: '长度在5-10个字符', trigger: 'change' }
-  ]
-};
+    "name": [
+        { required: true, message: '请输入用户名', trigger: 'blur' },
+        { min: 5, max: 10, message: '长度在5-10个字符', trigger: 'change' }
+    ],
+    "password": [
+        { required: true, message: '请输入密码', trigger: 'blur' },
+        { min: 5, max: 10, message: '长度在5-10个字符', trigger: 'change' }
+    ]
+}
 const loading = ref(false);
-
 const onSubmit = async () => {
-  loading.value = true;
-
-  try {
-    // 将validate方法封装为Promise
-    const valid = await new Promise((resolve) => {
-      formRef.value.validate((isValid) => {
-        resolve(isValid);
-      });
-    });
-
-    if (!valid) {
+  // console.log(formRef.value)
+  loading.value = true
+  await formRef.value.validate(async (valid) => {
+    // 放松请求给后端？ 
+    // 账号，密码数据库是否匹配 
+    // 发送给前端一个凭证 token
+    // 以后的请求 都需要携带这个凭证
+    // 服务器解析凭证 得到用户对象
+    if (valid) {
+      console.log('验证成功');
+      const res = await login(form);
+      console.log(res);
+      if (res.data.code == 200) {
+        let token = res.data.data;
+        localStorage.setItem('token', token)  // 本地存储
+        router.push('/')
+      } else {
+        console.log(res.data.message);
+      }
+    } else {
       console.log('验证失败');
-      return;
     }
+  });
+}
 
-    console.log('验证成功');
-    const res = await login(form);
-    console.log('登录响应:', res);
-    // 这里可以处理登录成功后的逻辑，如跳转页面等
-  } catch (error) {
-    console.error('登录过程中出现错误:', error);
-    // 错误处理逻辑
-  } finally {
-    loading.value = false;
-  }
-};
 </script>
 
 <style scoped>
-/* 样式根据需要自行定义 */
+
 </style>

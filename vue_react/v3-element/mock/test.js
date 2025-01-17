@@ -6,6 +6,14 @@ const secret = 'g10bqw2345';
 
 export default [
     {
+        url: '/api/getUserInfo',
+        method: 'get',
+        response: (req) => {
+
+        }
+    }
+    ,
+    {
         url: '/api/login',
         method: 'post',
         timeout: 2000,
