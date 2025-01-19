@@ -6,7 +6,7 @@
     - 在pinia里 所有的响应式数据都要添加类型约束 ref<泛型>
     - types 目录 是类型定义的专属目录， 按模块声明类型 
     export type xxx = {  type不属于js 属于ts  类型定义
-
+                      
     }
     - .vue文件中 加入 lang='ts' 支持
     - interface 接口  也可以用于类型定义
