@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 当使用时，浏览器知道这是一个模块，因此会自动启用对 ES6 及更高版本语法的支持，
+    包括但不限于 import 和 export 声明、箭头函数、解构赋值等现代 JavaScript 特性。 -->
+    <script type="module">
+        // js nlp 任务
+        import {
+            pipeline,  //pipe 模块 派出一个任务
+            env  // 环境
+        } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.6.0/dist/transformers.min.js'
+        env.allowLocalModel = false;  // 不要加载本地大模型
+    </script>
+</body>
+
+</html>
