@@ -69,7 +69,9 @@ const App = () => {
     // 前端游戏，加密,  压缩，AI，多线程 Web worker
     // html5  浏览器提供的多线程机制(纯计算类的工作交给他，不能DOM，没有this)
     worker.current.postMessage({
-      type: '请你帮我完成翻译',
+      text: input,
+      src_lang: sourceLanguage,
+      tgt_lang: targetLanguage,
     })
 
   }

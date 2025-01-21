@@ -37,6 +37,16 @@ self.addEventListener('message', async (event) => {
         self.postMessage(x)
     })
     console.log(event);
+    let output = await translator(event.data.text, {
+        tgt_lang: event.data.tgt_lang,
+        src_lang: event.data.src_lang
+        callback_function: (x) => {
+            self.postMessage({
+                status: 'update',
+                data: x
+            })
+        }
+    })
     self.postMessage({
         text: 'AI任务完成了'
     })
