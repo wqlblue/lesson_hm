@@ -80,6 +80,17 @@
            事件监听
            postMessage 发送事件
 
+- Transformer.js
+    - import from 从cdn加载 nlp js 库
+    - pipeline('sentiment-analysis');  // 派出一个任务 情感分析  
+        - 下载大模型    前端反馈
+        - pipeline(task,model,options)
+        - 放在 worker 线程 单例模式实例化 下载大模型等文件
+        - 调用options progress_callback  实时反馈下载进度
+        - web worker postMessage 消息机制 通知主线程
+            progress 模块   更新
+        - 从而完成 pipeline 功能准备和实例化 pipeline 准备的UI用户体验  
+         
 
 
 ## 百度翻译
@@ -89,3 +100,23 @@
        结果语言 中文
        待翻译文本
        翻译结果
+
+
+- es6 的介绍
+    - 阮一峰    
+    - 代码简洁
+        介绍 ？？空值合并运算符 
+        链判断运算符 ？.
+      我在开发AI项目的Progress 组件时
+      percentage = percentage?percentage:0 三元运算符
+      当不为空的值就是返回本身时，可以使用空值合并运算符  简化
+      percentage ?? 0
+    - 大型项目
+        class extend  块级作用域...
+    - 使用了 es6 class 封装了 MyTranslationPipeline 类  
+        - 将复杂留给自己
+        - 方便别人调用
+- 设计模式
+    - 单例模式
+        - pipeline 实例化时候， 只需要实例一次 下载大模型还有实例化特别耗性能
+        开销特别大

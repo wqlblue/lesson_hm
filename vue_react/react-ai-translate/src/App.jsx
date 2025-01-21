@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import LanguageSelector from "./components/LanguageSelector"; // 确保路径正确，并使用大写的组件名
 import './App.css'
+import Progress from "./components/Progress";
 
 const App = () => {
   const [sourceLanguage, setSourceLanguage] = useState('eng_Latn');
@@ -8,6 +9,8 @@ const App = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [disabled, setDisabled] = useState(false);
+  // 进度条数据数组 {fileName: '', percent:''}
+  const [progressItems, setProgressItems] = useState([]);
   // 
   const worker = useRef(null);  // 响应式 web worker 对象
 
@@ -25,7 +28,26 @@ const App = () => {
       console.log(worker);
 
       worker.current.addEventListener('message', (e) => {
-        console.log(e);
+        console.log(e, '++++++++++++++++++++++++++');
+        switch (e.data.status) {
+          case 'initiate':
+            setReady(false)
+            // 接受一个参数  函数 
+            // 上一次的状态
+            setProgressItems((prev) => [...prev, e.data])
+            break;
+          case 'progress':
+            setProgressItems((prev) => prev.map((item) => {
+              if (item.file === e.data.file) {
+                return {
+                  ...item,
+                  progress: e.data.progress,
+                }
+              }
+
+            }))
+            break;
+        }
       });
 
     }
@@ -83,7 +105,17 @@ const App = () => {
       </div>
       <button disabled={disabled} onClick={translate}>Translate</button>
 
-
+      {/* <Progress text="LLM" percentage={20} /> */}
+      <div className="progress-bars-container">
+        {
+          ready === false && (
+            <label > Loading models....</label>
+          )
+        }
+        {progressItems.map((data) => (
+          <Progress key={data.file} percentage={data.progress} />
+        ))}
+      </div>
     </>
   );
 }
