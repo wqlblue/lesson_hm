@@ -28,19 +28,25 @@ const LANGUAGES = {
     "Chinese (Simplified)": "zho_Hans",
     "English": "eng_Latn",
     "French": "fra_Latn",
+  }
 
-};
-const LanguageSelector = ({ type, defaultLanguage, onChange }) => { // 使用大写开头的函数名
+const LanguageSelector = (props) =>{
+    const {type,defaultLanguage,onChange} = props
     return (
         <div className="language-selector">
-            <label htmlFor="">{type}</label>
-            <select onChange={onChange} defaultValue={defaultLanguage}>
-                {Object.entries(LANGUAGES).map(([key, value]) => (
-                    <option value={value} key={value}>{key}</option>
-                ))}
+            <label>{type}</label>
+            <select 
+                onChange={onChange} 
+                defaultValue={defaultLanguage}
+            >
+                {
+                    Object.entries(LANGUAGES).map(([key,value]) => {
+                        return <option value={value} key={key}>{key}</option>
+                    })
+                }
             </select>
         </div>
-    );
+    )
 }
 
-export default LanguageSelector; // 导出时也使用大写的名称
+export default LanguageSelector
