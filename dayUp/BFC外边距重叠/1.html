@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent {
+            padding: 1px;
+            background-color: lightblue;
+            /* 注意：这里没有边框、内边距或其它阻止外边距重叠的属性 */
+        }
+
+        .child {
+            margin-top: 20px;
+            /* 子元素有一个上外边距 */
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="child">子元素</div>
+    </div>
+</body>
+
+</html>
