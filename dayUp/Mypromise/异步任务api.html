@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 成功和失败回调
+         * 1. 添加实例方法
+         * 2. 参数判断 (参考文档)
+         * 2.1 执行成功回调
+         * 2.2 执行失败回调
+         */
+
+        const PENDING = 'pending';
+        const FULFILLED = 'fulfilled';
+        const REJECTED = 'rejected';
+
+        class HMPromise {
+            // 状态
+            state = PENDING;
+            // 原因
+            result = undefined;
+
+            #handers = []; // [{onFulfilled, onRejected}...]
+
+            // 构造函数
+            constructor(func) {
+                // pending->fulfilled
+                const resolve = (result) => {
+                    if (this.state === PENDING) {
+                        this.state = FULFILLED;
+                        this.result = result;
+                        this.#handers.forEach(handler => {
+                            handler.onFulfilled(this.result);
+                        })
+                    }
+                };
+
+                // pending->rejected
+                const reject = (result) => {
+                    if (this.state === PENDING) {
+                        this.state = REJECTED;
+                        this.result = result;
+                        this.#handers.forEach(handler => {
+                            handler.onRejected(this.result);
+                        })
+                    }
+                };
+
+                try {
+                    func(resolve, reject);
+                }
+                catch (error) {
+                    reject(error);
+                }
+
+
+            }
+
+            /**
+               * 成功和失败回调
+               * 1. 添加实例方法
+               * 2. 参数判断 (参考文档)
+               * 2.1 执行成功回调
+               * 2.2 执行失败回调
+               */
+            then(onFulfilled, onRejected) {
+                onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value;
+                onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason };
+
+                if (this.state === FULFILLED) {
+                    onFulfilled(this.result);
+                } else if (this.state === REJECTED) {
+                    onRejected(this.result);
+                } else if (this.state === PENDING) {
+
+                    this.#handers.push({ onFulfilled, onRejected });
+                }
+            }
+
+        }
+
+
+
+        // 测试代码
+        console.log('top');
+
+        const p = new HMPromise((resolve, reject) => {
+            resolve('success');
+        });
+
+        p.then(res => {
+            console.log(res);
+        });
+
+        console.log('bottom');
+
+        /**
+ * 异步任务：
+ * Vue:Promise.then,MutationObserver,setImmediate,setTimeout
+ * 我们选用:queueMicrotask MutationObserver setTimeout
+ *
+ * Promise.then:手写Promise,不考虑这个
+ * queueMicrotask:node11,新式浏览器(不包括ie11)
+ * MutationObserver: node11不支持,ie11支持
+ * setImmediate:ie10,11支持,edge:12-18支持(不考虑)
+ * setTimeout:node,浏览器全支持
+ */
+
+        // ------------------------ 异步任务1 queueMicrotask ------------------------
+        // console.log('queueMicrotask1');
+
+        // queueMicrotask(() => {
+        //     console.log('queueMicrotask');
+        // })
+        // console.log('queueMicrotask2');
+        // ------------------------ 异步任务2 MutationObserver ------------------------  是一个用于监听 DOM 变化的接口
+        // 1. 创建观察器,并传入回调函数
+        // 2. 创建元素,并添加监听
+        // 3. 修改元素内容
+        console.log('MutationObserver1');
+
+        const obs = new MutationObserver(() => {
+            console.log('MutationObserver');
+        })
+
+        const div = document.createElement('div');
+        obs.observe(div, {  // 监听div元素
+            childList: true  // 监听子节点变化
+        })
+        div.innerHTML = '123';
+        console.log('MutationObserver2');
+
+        // ------------------------ 异步任务3 setTimeout ------------------------
+        // chrome,node
+    </script>
+</body>
+
+</html>

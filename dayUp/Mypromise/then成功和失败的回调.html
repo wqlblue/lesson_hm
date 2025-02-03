@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 成功和失败回调
+         * 1. 添加实例方法
+         * 2. 参数判断 (参考文档)
+         * 2.1 执行成功回调
+         * 2.2 执行失败回调
+         */
+
+        const PENDING = 'pending';
+        const FULFILLED = 'fulfilled';
+        const REJECTED = 'rejected';
+
+        class HMPromise {
+            // 状态
+            state = PENDING;
+            // 原因
+            result = undefined;
+
+            // 构造函数
+            constructor(func) {
+                // pending->fulfilled
+                const resolve = (result) => {
+                    if (this.state === PENDING) {
+                        this.state = FULFILLED;
+                        this.result = result;
+                    }
+                };
+
+                // pending->rejected
+                const reject = (result) => {
+                    if (this.state === PENDING) {
+                        this.state = REJECTED;
+                        this.result = result;
+                    }
+                };
+
+                try {
+                    func(resolve, reject);
+                }
+                catch (error) {
+                    reject(error);
+                }
+
+
+            }
+
+            /**
+               * 成功和失败回调
+               * 1. 添加实例方法
+               * 2. 参数判断 (参考文档)
+               * 2.1 执行成功回调
+               * 2.2 执行失败回调
+               */
+            then(onFulfilled, onRejected) {
+                onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value;
+                onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason };
+
+                if (this.state === FULFILLED) {
+                    onFulfilled(this.result);
+                } else if (this.state === REJECTED) {
+                    onRejected(this.result);
+                }
+            }
+
+        }
+
+
+
+        // 测试代码
+        const p = new HMPromise((resolve, reject) => {
+            // resolve('success');
+            reject('error'); // 注释掉的代码
+        });
+
+        p.then(res => {
+            console.log('成功回调:', res);
+        }, err => {
+            // console.log('失败回调:', err);
+        });
+
+    </script>
+</body>
+
+</html>
