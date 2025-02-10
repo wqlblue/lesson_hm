@@ -93,6 +93,15 @@
 
         }
 
+        // 测试代码
+        const p = new HMPromise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('success');
+                // reject('error'); // 注释掉的代码
+            }, 2000);
+
+        });
+
 
         /**
  * 异步任务 - 函数封装
